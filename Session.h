@@ -6,7 +6,6 @@
 #include<memory>
 #include<array>
 #include <boost/asio.hpp>
-#include "Logger.h"
 using namespace boost::asio;
 
 
@@ -34,17 +33,17 @@ public:
     std::string& receiveMessage() {
         boost::system::error_code error;
 
-        Logger::getLogger()->InfoLog("waiting to receive message", __PRETTY_FUNCTION__);
+        std::cout<<"waiting to receive message"<< __PRETTY_FUNCTION__;
         try{
 			size_t len = m_socket.read_some(boost::asio::buffer(m_acceptMessage), error);
 			m_acceptMessageWrapper = std::string(m_acceptMessage.begin(),m_acceptMessage.begin() + len);
 
 
-			Logger::getLogger()->InfoLog("message received", __PRETTY_FUNCTION__);
+			std::cout<<"message received"<< __PRETTY_FUNCTION__;
 
 
         }catch(std::exception& e){
-			Logger::getLogger()->DebugLog("error in reading: "+ std::string(e.what()), __PRETTY_FUNCTION__);
+			std::cout<<"error in reading: "<< e.what()<< __PRETTY_FUNCTION__;
 			m_isConnected = false;
         }
 
@@ -53,11 +52,11 @@ public:
 
     void sendMessage(const std::string& message) {
     	try{
-    		Logger::getLogger()->InfoLog("sending message",__PRETTY_FUNCTION__);
+    		std::cout<<"sending message"<<__PRETTY_FUNCTION__;
     		boost::asio::write(m_socket, boost::asio::buffer(message));
-    		Logger::getLogger()->InfoLog("message sent", __PRETTY_FUNCTION__);
+    		std::cout<<"message sent"<< __PRETTY_FUNCTION__;
     	}catch(std::exception& e){
-    		Logger::getLogger()->DebugLog("error in writing"+ std::string(e.what()), __PRETTY_FUNCTION__);
+    		std::cout<<"error in writing"<<e.what()<< __PRETTY_FUNCTION__;
     		m_isConnected = false;
     	}
     }

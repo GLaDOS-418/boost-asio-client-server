@@ -23,7 +23,7 @@ class Client {
 			boost::asio::connect(newConnection->getSocket(), &endp);
 
 		} catch (std::exception& e) {
-			Logger::getLogger()->DebugLog("client connection not created: "+std::string( e.what()),__PRETTY_FUNCTION__);
+			std::cout<<"client connection not created: "<<e.what()<<" ::[in]::"<<__PRETTY_FUNCTION__;
 		}
 
 			return newConnection;
@@ -31,7 +31,7 @@ class Client {
 
 	public:
 		Client(const std::string& ip, const int port) {
-			Logger::getLogger()->InfoLog("Client created", __PRETTY_FUNCTION__); //log
+			std::cout<<"Client created" <<__PRETTY_FUNCTION__; //log
 			m_connection = createConnection(ip, port);
 		}
 
