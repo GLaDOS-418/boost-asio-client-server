@@ -30,7 +30,7 @@ public:
 		try {
 			m_acceptor.accept(newConnection->getSocket());
 		} catch (std::exception& e) {
-			Logger::getLogger()->DebugLog("server connection not created"+std::string(e.what()), __PRETTY_FUNCTION__);
+			std::cout<<"server connection not created"<<e.what()<< __PRETTY_FUNCTION__;
 		}
 
 		return newConnection;

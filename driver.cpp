@@ -12,7 +12,6 @@
 #include<string>
 #include "Server.h"
 #include "Client.h"
-#include "Logger.h"
 
 using namespace std;
 
@@ -51,7 +50,6 @@ void func(std::shared_ptr<Session> connection) {
 			counter++;
 			connection->sendMessage(temp);
 			std::cout << "message sent...\n";
-			Logger::getLogger()->DebugLog("func Starts & message sent","func","func");
 			std::string ack = connection->receiveMessage();
 			std::cout << ack << std::endl;
 		} catch (std::exception& e) {
@@ -99,7 +97,7 @@ void listener(Server& s) {
 	Buffer b;
 
 	std::cout << "listener..\n";
-	Logger::getLogger()->DebugLog("Listener Starts","listener","listener");
+	std::cout<<"Listener Starts..."<<std::endl;
 	while (true) {
 		std::cout << "waiting for connection...." << std::endl;
 		auto conn = s.createConnection();
@@ -125,7 +123,6 @@ void listener(Server& s) {
 
 int main(int argc, char* argv[]) {
 
-	Logger::getLogger()->DebugLog("Program Starts",__PRETTY_FUNCTION__);
 	if (argc < 2)
 		return 1;
 
